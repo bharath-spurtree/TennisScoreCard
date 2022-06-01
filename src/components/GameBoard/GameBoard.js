@@ -3,18 +3,12 @@ import { View, Text, Pressable, Alert } from "react-native"
 import CreateGame from "../CreateGame/CreateGame"
 import ScoreCardHeader from "../ScoreCardHeader/ScoreCardHeader"
 import ScoreCard from "../ScoreCard/ScoreCard"
-import { useDispatch, useSelector } from "react-redux"
-import { addPointAction } from "../../actions/boardActions"
+import { useSelector } from "react-redux"
 import styles from "./styles"
 
 const GameBoard = () => {
     const [modalVisible, setModalVisible] = useState(false)
-    const dispatch = useDispatch()
     const { form, result } = useSelector(state => state.board)
-
-    const addPoint = (index) => {
-        dispatch(addPointAction(index))
-    }
 
     useEffect(() => {
         result && 
@@ -36,9 +30,7 @@ const GameBoard = () => {
                         {result && <Text style={styles.textColor}>{result}</Text>}
                     </View>
                     <ScoreCardHeader />
-                    <ScoreCard
-                        addPoint={addPoint}
-                    />
+                    <ScoreCard/>
                 </View>
             }
             <Pressable onPress={() => setModalVisible(true)} style={styles.buttonRight}>
